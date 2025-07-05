@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab</title> <!-- Title changed to "New Tab" for authenticity -->
+    <!-- Tailwind CSS CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the body to ensure full screen and Inter font */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* Full viewport height */
+            background-color: #f3f4f6; /* Light gray background */
+            overflow: hidden; /* Prevent scrollbars */
+            position: relative; /* For absolute positioning of customize button */
+        }
+        /* Animation for the virus detected message text */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* NEW: Animation for the red blinking screen effect */
+        @keyframes red-blink {
+            0%, 100% { background-color: #fff; } /* White background */
+            50% { background-color: #fee2e2; } /* Light red background (Tailwind red-100) */
+        }
+        .blink-red-screen {
+            animation: red-blink 0.5s ease-in-out infinite; /* Fast blinking */
+        }
+
+
+        /* Specific styling for the Google search bar to mimic Chrome */
+        .chrome-search-bar {
+            background-color: #ffffff;
+            border: 1px solid #dfe1e5;
+            box-shadow: none;
+            border-radius: 24px; /* More rounded corners */
+            height: 48px; /* Standard height */
+            margin: 0 auto;
+            width: 100%;
+            max-width: 584px; /* Max width for desktop */
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            transition: all 0.2s ease-in-out;
+        }
+        .chrome-search-bar:hover {
+            box-shadow: 0 1px 6px rgba(32,33,36,.28);
+            border-color: rgba(223,225,229,0);
+        }
+        .chrome-search-bar input {
+            flex-grow: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background: transparent;
+            padding: 0;
+        }
+        /* Adjusted padding for search bar icons */
+        .chrome-search-bar .icon-button-search {
+            padding: 8px; /* Consistent padding for clickable area */
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+        .chrome-search-bar .icon-button-search:hover {
+            background-color: #e8eaed;
+        }
+
+        /* General icon button styling for top right */
+        .top-right-icon-button {
+            width: 36px; /* Slightly larger for better touch target */
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            color: #5f6368;
+            transition: background-color 0.2s;
+        }
+        .top-right-icon-button:hover {
+            background-color: #e8eaed;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Content Area of the New Tab Page -->
+    <div id="content-area" class="flex flex-col items-center justify-center flex-grow p-6 bg-white w-full h-full relative">
+
+        <!-- Top Right Icons -->
+        <div class="absolute top-4 right-4 flex items-center space-x-4 text-sm text-gray-700">
+            <a href="#" class="hover:underline">Gmail</a>
+            <a href="#" class="hover:underline">Images</a>
+            <div class="top-right-icon-button">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </div>
+            <div class="top-right-icon-button">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <div class="top-right-icon-button">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- Google Logo -->
+        <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google Logo" class="mb-8 w-auto h-24 object-contain">
+
+        <!-- Search Bar -->
+        <div class="chrome-search-bar">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 ml-1 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input type="text" id="search-input" placeholder="Search Google or type a URL">
+            <button id="mic-button" class="icon-button-search">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-14 0V9a7 7 0 0114 0v2zm0 0a1.5 1.5 0 011.5 1.5v4a1.5 1.5 0 01-1.5 1.5h-2.5a1.5 1.5 0 01-1.5-1.5v-4a1.5 1.5 0 011.5-1.5H19z" />
+                </svg>
+            </button>
+            <button id="camera-button" class="icon-button-search ml-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Quick Links / Shortcuts -->
+        <div class="flex mt-8 space-x-6">
+            <div class="flex flex-col items-center cursor-pointer">
+                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2 shadow-md">
+                    <img src="https://www.gstatic.com/chrome/ntp/data/web_store_icon_2023_24dp.png" alt="Web Store" class="w-6 h-6">
+                </div>
+                <span class="text-sm text-gray-700">Web Store</span>
+            </div>
+            <div class="flex flex-col items-center cursor-pointer">
+                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                </div>
+                <span class="text-sm text-gray-700">Add shortcut</span>
+            </div>
+        </div>
+
+        <!-- Customize Chrome Button -->
+        <div class="absolute bottom-4 right-4">
+            <button class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full flex items-center space-x-2 shadow-md hover:bg-blue-200 transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+                <span>Customize Chrome</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Virus Detected Content (Hidden by default, shown via JavaScript) -->
+    <!-- Added blink-red-screen class for the blinking effect -->
+    <div id="virus-detected-page" class="hidden text-center p-4 flex-grow flex flex-col justify-center items-center absolute inset-0 bg-white">
+        <h1 class="text-5xl font-bold text-red-600 mb-6 animate-pulse">BROWSER VIRUS DETECTED!</h1>
+        <p class="text-3xl text-red-500 mb-4">Virus Name: <span class="font-extrabold">CRI 1536</span></p>
+        <p class="text-2xl text-red-700 mb-8">This is a <span class="font-bold">HIGH LEVEL VIRUS</span>!</p>
+        <p class="text-xl text-gray-800 mb-4">When you try to remove it, it affects all files on your PC immediately!</p>
+        <p class="text-xl text-gray-800 mb-8 font-bold">IMMEDIATELY TAKE BACKUP!</p>
+
+        <!-- Message appearing after 20 seconds -->
+        <div id="infection-message" class="text-2xl text-red-800 font-semibold mt-10 p-4 bg-red-100 rounded-lg hidden shadow-inner">
+            This computer is infected by CRI 1536.
+        </div>
+
+        <!-- "Video" container appearing after 10 seconds -->
+        <div id="prank-video-container" class="mt-12 hidden">
+            <div id="prank-video-placeholder" class="relative w-full max-w-xl mx-auto bg-black rounded-lg overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-300" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio for video-like appearance -->
+                <!-- Initially empty, content added on click -->
+                <div class="absolute inset-0 flex items-center justify-center text-white text-4xl font-bold bg-gray-900 rounded-lg"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Ensure the DOM is fully loaded before running the script
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get references to the HTML elements
+            const searchInput = document.getElementById('search-input');
+            const contentArea = document.getElementById('content-area'); // The main Chrome homepage content
+            const virusDetectedPage = document.getElementById('virus-detected-page');
+            const infectionMessage = document.getElementById('infection-message');
+            const prankVideoContainer = document.getElementById('prank-video-container');
+            const prankVideoPlaceholder = document.getElementById('prank-video-placeholder'); // This is the clickable div
+
+            // Get the search icon (first SVG inside chrome-search-bar)
+            const searchIconInSearchBar = document.querySelector('.chrome-search-bar > svg');
+
+            /**
+             * Function to transition from the Chrome homepage to the virus detected page.
+             * It also sets up the timed messages and video appearance.
+             */
+            const showVirusPage = () => {
+                // Hide the Chrome homepage content and show the virus detected page
+                contentArea.classList.add('hidden');
+                virusDetectedPage.classList.remove('hidden');
+
+                // NEW: Add the blinking class to the virus detected page
+                virusDetectedPage.classList.add('blink-red-screen');
+
+
+                // Set a timeout to display the "infection message" after 20 seconds
+                setTimeout(() => {
+                    infectionMessage.classList.remove('hidden');
+                }, 20000); // 20000 milliseconds = 20 seconds
+
+                // Set a timeout to display the "prank video container" after 10 seconds (changed from 50)
+                setTimeout(() => {
+                    prankVideoContainer.classList.remove('hidden');
+                }, 10000); // 10000 milliseconds = 10 seconds
+            };
+
+            // Event listener for the search input field:
+            // If the 'Enter' key is pressed, trigger the virus page display.
+            searchInput.addEventListener('keyup', (event) => {
+                if (event.key === 'Enter') {
+                    showVirusPage();
+                }
+            });
+
+            // Event listener for the search icon within the search bar:
+            // If the search icon is clicked, trigger the virus page display.
+            if (searchIconInSearchBar) {
+                searchIconInSearchBar.addEventListener('click', () => {
+                    showVirusPage();
+                });
+            }
+
+            // Event listener for the "prank video" placeholder:
+            // When clicked, change its text to "PRANK!" and update its styling.
+            prankVideoPlaceholder.addEventListener('click', () => {
+                // Get the inner div where the text will be displayed
+                const innerTextDiv = prankVideoPlaceholder.querySelector('div');
+                innerTextDiv.textContent = 'PRANK!';
+                // Change background to a friendly green and text to white for the reveal
+                innerTextDiv.classList.add('bg-green-600', 'text-white');
+                innerTextDiv.classList.remove('bg-gray-900'); // Remove previous dark background
+                innerTextDiv.classList.add('transition-colors', 'duration-500'); // Smooth transition
+
+                // NEW: Stop the blinking effect when the prank is revealed
+                virusDetectedPage.classList.remove('blink-red-screen');
+                virusDetectedPage.style.backgroundColor = '#fff'; // Ensure it stays white
+            });
+        });
+    </script>
+</body>
+</html>
